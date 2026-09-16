@@ -18,7 +18,7 @@ public class main {
         System.out.println("[i] Password checking..."); //fix the sentence!
         System.out.println(password);
 
-        String regex = "(?<lower>[a-z])|(?<upper>[A-Z])|(?<num>\\d)|(?>special>[^a-zA-Z0-9\\s])";
+        String regex = "(?<lower>[a-z])|(?<upper>[A-Z])|(?<num>\\d)|(?<special>[^a-zA-Z0-9\\s])";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(password);
 
@@ -45,53 +45,51 @@ public class main {
 
         if (pwdLength < 8) {
             System.out.println("[!] Your password must be longer than 8 characters.");
-        }
-        else {
-            pwdscore = (pwdLength-8)*10;
-            System.out.println(pwdscore);
+        } else {
             if (lower > 0) {
                 pwdscore += 5;
-                System.out.println(pwdscore);
-            }
-            else {
+
+            } else {
                 pwdscore -= 5;
             }
             if (upper > 0) {
                 pwdscore += 5;
-                System.out.println(pwdscore);
-            }
-            else {
+
+            } else {
                 pwdscore -= 5;
             }
             if (num > 0) {
                 pwdscore += 5;
-                System.out.println(pwdscore);
-            }
-            else {
+
+            } else {
                 pwdscore -= 5;
             }
             if (special > 0) {
                 pwdscore += 5;
-                System.out.println(pwdscore);
-            }
-            else {
+
+            } else {
                 pwdscore -= 5;
             }
 
         }
 
 
-        System.out.println(pwdscore);
-
-
-        //password enntropy
-        //E = L x log2^(R)
-        //E (entropy)
-        //L (length)
-        //R (pool size)
-        //entropy algorithm not enough for scores
-
+        scorecalculater(pwdscore);
 
 
     }
+
+    public static void scorecalculater(int pwdscore) {
+        if (pwdscore > 15) {
+            System.out.println("[i] Strong Password. Score: " + pwdscore);
+        } else if (pwdscore <= 15 && pwdscore > 5) {
+            System.out.println("[i] Medium Password. Score: " + pwdscore);
+        } else {
+            System.out.println("[i] Weak Password. Score: " + pwdscore);
+        }
+    }
+
+
 }
+
+//this project and algorithm need to be improved
